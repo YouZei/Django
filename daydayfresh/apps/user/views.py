@@ -4,10 +4,13 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django_redis import get_redis_connection
 from celery_tasks.tasks import send_register_active_email
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired
-from .models import User
+from utils.mixin import LoginRequiredMixin
+from user.models import User, Address
+from goods.models import GoodsSKU
 import re
 
 
@@ -132,9 +135,10 @@ class LoginView(View):
                 # 用户已激活
                 # 记录用户的登录状态,保存在session中
                 login(request, user)
-                # 获取登录后所要跳转到的地址
+                # 获取登录后所要跳转到的地址,默认跳转首页
+                next_url = request.GET.get('next', reverse('goods:index'))
 
-                response =  redirect(reverse('goods:index'))
+                response = redirect(next_url)
 
                 # 判断是否需要记住用户名
                 remember = request.POST.get('remember')
@@ -153,3 +157,114 @@ class LoginView(View):
         else:
             # 用户名或密码错误
             return render(request, 'login.html', {'errmsg': '用户名或密码错误'})
+
+
+# user/logout
+class LogoutView(View):
+    """注销"""
+
+    def get(self, request):
+        """注销"""
+        # 使用logout退出登录用户，会清掉所有session
+        logout(request)
+        return redirect(reverse('goods:index'))
+
+
+# user/
+class UserInfoView(LoginRequiredMixin, View):
+    """用户中心-信息页"""
+
+    def get(self, request):
+        """显示"""
+
+        # 获取用户的个人信息
+        user = request.user
+
+        # 根据用户获取address信息
+
+        address = Address.objects.get_default_address(user)
+
+        # 获取用户的历史浏览记录
+        # 获取StrictRedis对象
+        con = get_redis_connection('default')
+
+        # 组织需要存入的list键值格式
+        history_key = 'history_%id' % user.id
+
+        # 存入并返回用户浏览的前5个商品的id
+        sku_id = con.lrange(history_key, 0, 4)
+
+        # 从数据库查询出具体sku_id对应的商品信息
+
+        # 遍历数据库拿到浏览的前5个商品对象并放入列表
+        goods_li = list()
+        for id in sku_id:
+            goods = GoodsSKU.objects.get(id=id)
+            goods_li.append(goods)
+
+        # 定义上下文
+        context = {'page': 'user',
+                   'address': address,
+                   'goods_li': goods_li}
+        return render(request, 'user_center_info.html', context)  # page=user
+
+
+# user/order
+class UserOrderView(LoginRequiredMixin, View):
+    """用户中心-订单页"""
+
+    def get(self, request):
+        """显示"""
+
+        # 获取用户的订单信息
+
+        return render(request, 'user_center_order.html', {'page': 'order'})  # page=order
+
+
+# user/address
+class UserAddressView(LoginRequiredMixin, View):
+    """用户中心-订单页"""
+
+    def get(self, request):
+        """显示"""
+
+        # 获取登录用户的user对象
+        user = request.user
+
+        # 获取用户的默认地址
+        address = Address.objects.get_default_address(user)
+
+        return render(request, 'user_center_site.html', {'page': 'address', 'address': address})  # page=address
+
+    def post(self, request):
+        """地址的添加"""
+        # 接受数据
+        receiver = request.POST.get('receiver')
+        addr = request.POST.get('addr')
+        zip_code = request.POST.get('zip_code')
+        phone = request.POST.get('phone')
+
+        # 校验数据
+        if not all([receiver, addr, phone]):
+            return render(request, 'user_center_site.html', {'errmsg': '填写不完整'})
+        # 业务处理：地址添加
+        if not re.match(r'^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$', phone):
+            return render(request, 'user_center_site.html', {'errmsg': '手机号码不正确'})
+
+        # 如果有默认的地址，添加的新地址不作为默认地址，否则作为默认地址
+        # 获取登录用户的user对象
+        user = request.user
+
+        address = Address.objects.get_default_address(user)  # 查不到返回none
+
+        if address:
+            is_default = False
+        else:
+            is_default = True
+
+        # 添加地址
+        Address.objects.create(user=user, receiver=receiver, addr=addr, zip_code=zip_code,
+                               phone=phone, is_default=is_default)
+
+        # 返回应答,刷新地址页面
+        return redirect(reverse('user:address'))
