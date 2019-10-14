@@ -180,7 +180,7 @@ class UserInfoView(LoginRequiredMixin, View):
         # 获取用户的个人信息
         user = request.user
 
-        # 根据用户获取address信息
+        # 根据用户获取默认address信息
 
         address = Address.objects.get_default_address(user)
 
