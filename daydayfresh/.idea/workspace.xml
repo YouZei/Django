@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e67f8f2a-cf24-496e-bf1d-2f34a088028b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/fdfs/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/fdfs/client.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/fdfs/storage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/user/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -119,8 +115,16 @@
       <workItem from="1570841690694" duration="10000" />
       <workItem from="1570856351152" duration="58000" />
       <workItem from="1571051644473" duration="3172000" />
-      <workItem from="1571057396973" duration="2057000" />
+      <workItem from="1571057396973" duration="2635000" />
     </task>
+    <task id="LOCAL-00001" summary="自定义文件存储类">
+      <created>1571059525230</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571059525230</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,6 +152,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="自定义文件存储类" />
+    <option name="LAST_COMMIT_MESSAGE" value="自定义文件存储类" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
