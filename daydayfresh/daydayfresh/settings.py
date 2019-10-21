@@ -96,7 +96,7 @@ AUTH_USER_MODEL = 'user.User'
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -142,3 +142,12 @@ SESSION_CACHE_ALIAS = "default"
 
 # 配置登录的url地址
 LOGIN_URL = '/user/login'
+
+# 设置Django文件存储类
+DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
+
+
+# 设置fastFDS配置文件client.conf路径
+FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
+
+FDFS_URL = 'http://192.168.13.201:8888'
