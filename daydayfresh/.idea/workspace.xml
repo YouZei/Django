@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e67f8f2a-cf24-496e-bf1d-2f34a088028b" name="Default Changelist" comment="自定义文件存储类">
+      <change afterPath="$PROJECT_DIR$/templates/static_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/static_index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/daydayfresh.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/daydayfresh.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/goods/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/celery_tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/celery_tasks/tasks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/daydayfresh/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/daydayfresh/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base_no_cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base_no_cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/fdfs/client.conf" beforeDir="false" afterPath="$PROJECT_DIR$/utils/fdfs/client.conf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,29 +41,31 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="ProjectId" id="1RuzlluLznHx4ry6nt2YTHrukXe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\project\Django\daydayfresh\utils" />
-      <recent name="E:\project\Django\daydayfresh\static\images" />
-      <recent name="E:\project\Django\daydayfresh\templates" />
-      <recent name="E:\project\daydayfresh\templates" />
-      <recent name="E:\project\daydayfresh\apps\user" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\project\Django\daydayfresh\utils\fdfs" />
       <recent name="E:\project\daydayfresh\apps" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\project\Django\daydayfresh\templates" />
+      <recent name="E:\project\Django\daydayfresh\utils" />
+      <recent name="E:\project\Django\daydayfresh\static\images" />
+      <recent name="E:\project\daydayfresh\templates" />
+      <recent name="E:\project\daydayfresh\apps\user" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -136,6 +142,10 @@
       <workItem from="1571661279622" duration="5635000" />
       <workItem from="1571672998131" duration="794000" />
       <workItem from="1571759879096" duration="5173000" />
+      <workItem from="1573619688928" duration="1899000" />
+      <workItem from="1573645264528" duration="100000" />
+      <workItem from="1573645394473" duration="7587000" />
+      <workItem from="1573698062791" duration="1689000" />
     </task>
     <task id="LOCAL-00001" summary="自定义文件存储类">
       <created>1571059525230</created>
