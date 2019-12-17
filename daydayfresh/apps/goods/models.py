@@ -38,6 +38,10 @@ class GoodsSKU(BaseModel):
     sales = models.IntegerField(default=0, verbose_name='商品销量')
     status = models.SmallIntegerField(default=1, choices=status_choices, verbose_name='商品状态')
 
+    def __str__(self):
+        return self.name
+
+
     class Meta:
         db_table = 'df_goods_sku'
         verbose_name = '商品'
@@ -50,6 +54,10 @@ class Goods(BaseModel):
     # 富文本类型:带有格式的文本
     detail = HTMLField(blank=True, verbose_name='商品详情')
 
+    def __str__(self):
+        return self.name
+
+
     class Meta:
         db_table = 'df_goods'
         verbose_name = '商品SPU'
@@ -60,6 +68,9 @@ class GoodsImage(BaseModel):
     '''商品图片模型类'''
     sku = models.ForeignKey('GoodsSKU', verbose_name='商品')
     image = models.ImageField(upload_to='goods', verbose_name='图片路径')
+
+    def __str__(self):
+        return self.sku
 
     class Meta:
         db_table = 'df_goods_image'
@@ -72,6 +83,9 @@ class IndexGoodsBanner(BaseModel):
     sku = models.ForeignKey('GoodsSKU', verbose_name='商品')
     image = models.ImageField(upload_to='banner', verbose_name='图片')
     index = models.SmallIntegerField(default=0, verbose_name='展示顺序')
+
+    def __str__(self):
+        return self.sku
 
     class Meta:
         db_table = 'df_index_banner'
@@ -91,6 +105,9 @@ class IndexTypeGoodsBanner(BaseModel):
     display_type = models.SmallIntegerField(default=1, choices=DISPLAY_TYPE_CHOICES, verbose_name='展示类型')
     index = models.SmallIntegerField(default=0, verbose_name='展示顺序')
 
+    def __str__(self):
+        return self.sku
+
     class Meta:
         db_table = 'df_index_type_goods'
         verbose_name = "主页分类展示商品"
@@ -103,6 +120,9 @@ class IndexPromotionBanner(BaseModel):
     url = models.CharField(max_length=256, verbose_name='活动链接')
     image = models.ImageField(upload_to='banner', verbose_name='活动图片')
     index = models.SmallIntegerField(default=0, verbose_name='展示顺序')
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         db_table = 'df_index_promotion'

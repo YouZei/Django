@@ -15,7 +15,7 @@ from django.template import loader, RequestContext
 # django.setup()
 
 # 创建一个Celery实例对象
-app = Celery('celery_tasks.tasks', broker='redis://192.168.13.200:6380/1')
+app = Celery('celery_tasks.tasks', broker='redis://192.168.0.131:6380/1')
 
 
 # 定义任务函数

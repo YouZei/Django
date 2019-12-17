@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',  # 富文本编辑器
+    'haystack',  # 注册全文检索框架
     'cart',  # 购物车模块
     'user',  # 商品模块
     'goods',  # 商品模块
@@ -85,12 +86,12 @@ DATABASES = {
         'NAME': 'daydayfresh',
         'USER': 'myuser',
         'PASSWORD': 'mypassword',
-        'HOST': '39.107.83.244',
+        'HOST': '192.168.0.131',
         'PORT': 3306,
     }
 }
 
-# django认证系统使用的模型类
+# django认证系统使用的模型类,自定义
 AUTH_USER_MODEL = 'user.User'
 
 # Internationalization
@@ -129,7 +130,7 @@ EMAIL_FROM = '天天生鲜<1058303163@qq.com>'
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://39.107.83.244:6379/1",
+        "LOCATION": "redis://192.168.0.131:6380/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -146,8 +147,25 @@ LOGIN_URL = '/user/login'
 # 设置Django文件存储类
 DEFAULT_FILE_STORAGE = 'utils.fdfs.storage.FDFSStorage'
 
-
 # 设置fastFDS配置文件client.conf路径
 FDFS_CLIENT_CONF = './utils/fdfs/client.conf'
 
-FDFS_URL = 'http://39.107.83.244:8888/'
+FDFS_URL = 'http://192.168.0.132:8888/'
+
+
+# 全文检索框架的配置
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # 使用whoosh引擎
+        # 'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        # 索引文件路径
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+# 当添加、修改、删除数据时，自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# 指定搜索结果每页显示的条数
+HAYSTACK_SEARCH_RESULTS_PER_PAGE=1
