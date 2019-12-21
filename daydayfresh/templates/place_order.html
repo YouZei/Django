@@ -73,7 +73,6 @@
 		<div class="popup">
 			<p>订单提交成功！</p>
 		</div>
-		
 		<div class="mask"></div>
 	</div>
 {% endblock bottom %}
@@ -101,17 +100,23 @@
                             $('.popup_con').fadeOut('fast',function(){
                                 window.location.href = '/user/order/1';
                             });
-                        },3000)
-
+                        },1500)
                     });
                 }
                 else{
                     alert(data.errmsg)
                 }
             })
-
-
-
 		});
+		// 搜索优化
+        $("#sub").click(function (event) {
+            event.preventDefault();
+            var query_val = $(this).prev().val();
+            if (!query_val){
+                location.reload()
+            }else {
+               $(this).parent().submit()
+            }
+        })
 	</script>
 {% endblock bottomfiles %}

@@ -6,6 +6,7 @@ from order.models import OrderGoods
 from django.core.cache import cache
 from django.core.paginator import Paginator
 from django_redis import get_redis_connection
+from haystack.views import SearchView
 
 
 # Create your views here.
@@ -86,7 +87,7 @@ class DetailView(View):
         sku_orders = OrderGoods.objects.filter(sku=sku).exclude(comment='')
 
         # 获取新品信息
-        new_skus = GoodsSKU.objects.filter(type=sku.type).order_by('-create_time')[:-2]
+        new_skus = GoodsSKU.objects.filter(type=sku.type).order_by('-create_time')[:2]
 
         # 获取同一个是SPU商品的其他规格商品
         same_spu_skus = GoodsSKU.objects.filter(goods=sku.goods).exclude(id=goods_id)
@@ -113,10 +114,11 @@ class DetailView(View):
         # 组织模版上下文
         context = {
             'sku': sku,
-            'type': types,
+            'types': types,
             'new_skus': new_skus,
             "same_spu_skus": same_spu_skus,
-            'cart_count': cart_count
+            'cart_count': cart_count,
+            'sku_orders': sku_orders,
         }
 
         # 使用模版
@@ -144,15 +146,15 @@ class ListView(View):
         # sort= hot 按照热度
         sort = request.GET.get('sort')  # 获取参数
         if sort == 'price':
-            skus = GoodsType.objects.filter(type=type).order_by('price')
+            skus = GoodsSKU.objects.filter(type=type).order_by('price')
         elif sort == 'hot':
-            skus = GoodsType.objects.filter(type=type).order_by('-sales')
+            skus = GoodsSKU.objects.filter(type=type).order_by('-sales')
         else:
             sort = 'default'
-            skus = GoodsType.objects.filter(type=type).order_by('-id')
+            skus = GoodsSKU.objects.filter(type=type).order_by('-id')
 
-        # 对数据进行分页
-        paginator = Paginator(skus, 1)
+        # 对数据进行分页,每页显示数据10个
+        paginator = Paginator(skus, 10)
 
         # 获取第page页内容
         try:
@@ -206,3 +208,27 @@ class ListView(View):
 
         # 使用模板
         return render(request, 'list.html', context)
+
+
+class MySearchView(SearchView):
+    """重写haystack视图"""
+
+    def create_response(self):  # 重载create_response来实现接口编写
+        context = super().get_context()  # 搜索引擎完成后的内容
+
+        # 获取商品的分类信息
+        types = GoodsType.objects.all()
+
+        # 获取用户购物车商品数量
+        user = self.request.user
+        cart_count = 0
+        if user.is_authenticated():
+            # 用户已登录
+            conn = get_redis_connection('default')
+            cart_key = 'cart_%d' % user.id
+            cart_count = conn.hlen(cart_key)
+
+        # 进行购物车数量追加
+        context.update(dict(cart_count=cart_count, types=types))
+
+        return render(self.request, 'search/search.html', context)

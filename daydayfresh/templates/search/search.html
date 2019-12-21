@@ -1,25 +1,32 @@
 {% extends 'base_detail_list.html' %}
+{% load staticfiles %}
 {% block title %}天天生鲜-商品搜索结果列表{% endblock title %}
 {% block main_content %}
 	<div class="breadcrumb">
-		<a href="#">{{ query }}</a>
+        <a href="javascript:;">{{ query }}</a>
 		<span>></span>
-		<a href="#">搜索结果如下:</a>
+		<a href="javascript:;">搜索结果如下:</a>
 	</div>
-
 	<div class="main_wrap clearfix">
         <ul class="goods_type_list clearfix">
+        {% if query  %}
             {% for item in page %}
             <li>
                 <a href="{% url 'goods:detail' item.object.id %}"><img src="{{ item.object.image.url }}"></a>
                 <h4><a href="{% url 'goods:detail' item.object.id %}">{{ item.object.name }}</a></h4>
                 <div class="operate">
+                    {% csrf_token %}
                     <span class="prize">￥{{ item.object.price }}</span>
                     <span class="unit">{{ item.object.price}}/{{ item.object.unite }}</span>
-                    <a href="#" class="add_goods" title="加入购物车"></a>
+                    <a href="javascript:;" class="add_goods" sku_id="{{ item.object.id }}" title="加入购物车"></a>
                 </div>
             </li>
+                {% empty %}
+                <strong>未找到“{{ query }}”相关商品</strong>
             {% endfor %}
+        {% else %}
+
+        {% endif %}
         </ul>
         <div class="pagenation">
                 {% if page.has_previous %}
@@ -38,3 +45,65 @@
 			</div>
 	</div>
 {% endblock main_content %}
+{% block bottom %}
+	<div class="add_jump"></div>
+{% endblock bottom %}
+{% block bottomfiles %}
+    <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript">
+        $('.add_goods').click(function(){
+
+            // 获取add_cart div元素左上角的坐标
+            var $add_x = $(this).offset().top;
+            var $add_y = $(this).offset().left;
+
+            // 获取show_count div元素左上角的坐标
+            var $to_x = $('#show_count').offset().top;
+            var $to_y = $('#show_count').offset().left;
+            // 获取商品id和商品数量
+            sku_id = $(this).attr('sku_id') ;// attr prop
+            count = 1;
+            csrf = $('input[name="csrfmiddlewaretoken"]').val();
+            // 组织参数
+            params = {'sku_id':sku_id, 'count':count, 'csrfmiddlewaretoken':csrf};
+            // 发起ajax post请求，访问/cart/add, 传递参数:sku_id count
+            $.post('/cart/add', params, function (data) {
+                if (data.res == 5){
+                    // 添加成功
+                    $(".add_jump").css({'left':$add_y+1,'top':$add_x+1,'display':'block'});
+                    $(".add_jump").stop().animate({
+                        'left': $to_y+7,
+                        'top': $to_x+7},
+                        "fast", function() {
+                            $(".add_jump").fadeOut('fast',function(){
+                                // 重新设置用户购物车中商品的条目数
+                                $('#show_count').html(data.total_count);
+                            });
+			        });
+                }
+                else{
+                    // 用户未登录,跳转到登录页面
+                    if (data.res==0){
+                        location.href = "/user/login?next=/search?q={{ query }}"
+                    }else {
+                        // 添加失败
+                        alert(data.errmsg)
+                    }
+                }
+            })
+        })
+        // 搜索优化
+        $("#sub").click(function (event) {
+            event.preventDefault();
+            var query_val = $(this).prev().val();
+            if (!query_val){
+                location.reload()
+            }else {
+               $(this).parent().submit()
+            }
+        })
+
+    </script>
+
+
+{% endblock bottomfiles %}

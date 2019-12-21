@@ -1,14 +1,16 @@
 {% extends 'base_user_center.html' %}
+{% load staticfiles %}
 {% block right_content %}
     <div class="right_content clearfix">
         <h3 class="common_title2">收货地址</h3>
         <div class="site_con">
             <dl>
-                <dt>当前地址：</dt>
                 {% if address %}
-                    <dd>{{ address.addr }} （{{ address.receiver }} 收） {{ address.phone }}</dd>
+                    {% for addres in address %}
+                        <dd>{{ addres.addr }} （{{ addres.receiver }} 收） {{ addres.phone }}</dd>
+                    {% endfor %}
                 {% else %}
-                    <dd>无默认地址</dd>
+                    <dd>无收货地址</dd>
                 {% endif %}
             </dl>
         </div>
@@ -38,3 +40,18 @@
         </div>
     </div>
 {% endblock right_content %}
+{% block bottomfiles %}
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script>
+     // 搜索优化
+        $("#sub").click(function (event) {
+            event.preventDefault();
+            var query_val = $(this).prev().val();
+            if (!query_val){
+                location.reload()
+            }else {
+               $(this).parent().submit()
+            }
+        })
+    </script>
+{% endblock bottomfiles %}

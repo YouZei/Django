@@ -3,15 +3,15 @@
 {% load staticfiles %}
 {% block main_content %}
 	<div class="breadcrumb">
-		<a href="#">全部分类</a>
+		<a href="/">全部分类</a>
 		<span>></span>
-		<a href="#">{{ sku.type.name }}</a>
+		<a href="{% url 'goods:list' sku.type.id 1 %}">{{ sku.type.name }}</a>
 		<span>></span>
-		<a href="#">商品详情</a>
+		<a href="javascript:;">商品详情</a>
 	</div>
 
 	<div class="goods_detail_con clearfix">
-		<div class="goods_detail_pic fl"><img src="{{ sku.image.url }}"></div>
+		<div class="goods_detail_pic fl"><img src="{{ sku.image.url }}" width="100%"></div>
 
 		<div class="goods_detail_list fr">
 			<h3>{{ sku.name }}</h3>
@@ -40,8 +40,8 @@
 			<div class="total">总价：<em>16.80元</em></div>
 			<div class="operate_btn">
                 {% csrf_token %}
-				<a href="javascript:;" class="buy_btn">立即购买</a>
-				<a href="javascript:;" sku_id="{{ sku.id }}" class="add_cart" id="add_cart">加入购物车</a>
+				<a href="javascript:;" class="buy_btn" id="buy_btn">立即购买</a>
+				<a href="javascript:;" sku_id="{{ sku.id }}" class="add_cart active_show" id="add_cart">加入购物车</a>
 			</div>
 		</div>
 	</div>
@@ -106,6 +106,21 @@
             $('#tab_comment').show()
         })
 
+
+        // 控制购买 加入购物车显示
+         $('#add_cart').hover(function () {
+            $('#buy_btn').removeClass('active_show')
+            $(this).addClass('active_show')
+        })
+
+        $('#buy_btn').hover(function () {
+           $('#add_cart').removeClass('active_show')
+            $(this).addClass('active_show')
+        })
+
+
+
+
         update_goods_amount()
         // 计算商品的总价格
         function update_goods_amount() {
@@ -169,7 +184,7 @@
 		var $to_x = $('#show_count').offset().top;
 		var $to_y = $('#show_count').offset().left;
 
-
+        // 加入购物车
 		$('#add_cart').click(function(){
             // 获取商品id和商品数量
             sku_id = $(this).attr('sku_id') // attr prop
@@ -181,7 +196,7 @@
             $.post('/cart/add', params, function (data) {
                 if (data.res == 5){
                     // 添加成功
-                    $(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'})
+                    $(".add_jump").css({'left':$add_y+80,'top':$add_x+10,'display':'block'});
                     $(".add_jump").stop().animate({
                         'left': $to_y+7,
                         'top': $to_x+7},
@@ -193,10 +208,57 @@
 			        });
                 }
                 else{
-                    // 添加失败
-                    alert(data.errmsg)
+                    // 用户未登录,跳转到登录页面
+                    if (data.res==0){
+                        location.href = "/user/login?next={% url 'goods:detail' sku.id %}"
+                    }else {
+                        // 添加失败
+                        alert(data.errmsg)
+                    }
+
                 }
             })
 		})
+
+        // 立即购买
+        $('#buy_btn').click(function(){
+            // 获取商品id和商品数量
+            sku_id = $(this).next().attr('sku_id') ;// attr prop
+            count = $('.num_show').val()
+            csrf = $('input[name="csrfmiddlewaretoken"]').val();
+            // 组织参数
+            params = {'sku_id':sku_id, 'count':count, 'csrfmiddlewaretoken':csrf};
+            // 发起ajax post请求，访问/cart/add, 传递参数:sku_id count
+            $.post('/cart/add', params, function (data) {
+                if (data.res == 5){
+                    // 添加成功
+                    // 重新设置用户购物车中商品的条目数
+                    $('#show_count').html(data.total_count)
+                    location.href = {% url 'cart:show' %}
+                }
+                else{
+                    // 用户未登录,跳转到登录页面
+                    if (data.res==0){
+                        location.href = "/user/login?next={% url 'goods:detail' sku.id %}"
+                    }else {
+                        // 添加失败
+                        alert(data.errmsg)
+                    }
+
+                }
+            })
+		})
+
+        // 搜索优化
+        $("#sub").click(function (event) {
+            event.preventDefault();
+            var query_val = $(this).prev().val();
+            if (!query_val){
+                location.reload()
+            }else {
+               $(this).parent().submit()
+            }
+        })
+
 	</script>
 {% endblock bottomfiles %}

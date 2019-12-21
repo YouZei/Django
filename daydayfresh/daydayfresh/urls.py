@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
+from .views import html404
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^tinymce/', include('tinymce.urls')),  # 富文本编辑器
@@ -24,3 +24,5 @@ urlpatterns = [
     url(r'^cart/', include('cart.urls', namespace='cart')),  # 购物车模块
     url(r'^', include('goods.urls', namespace='goods')),  # 商品模块
 ]
+
+handler404 = html404

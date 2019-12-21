@@ -11,6 +11,8 @@ from itsdangerous import SignatureExpired
 from utils.mixin import LoginRequiredMixin
 from user.models import User, Address
 from goods.models import GoodsSKU
+from order.models import OrderGoods,OrderInfo
+from django.core.paginator import Paginator
 import re
 
 
@@ -189,7 +191,7 @@ class UserInfoView(LoginRequiredMixin, View):
         con = get_redis_connection('default')
 
         # 组织需要存入的list键值格式
-        history_key = 'history_%id' % user.id
+        history_key = 'history_%d' % user.id
 
         # 存入并返回用户浏览的前5个商品的id
         sku_id = con.lrange(history_key, 0, 4)
@@ -212,13 +214,66 @@ class UserInfoView(LoginRequiredMixin, View):
 # user/order
 class UserOrderView(LoginRequiredMixin, View):
     """用户中心-订单页"""
-
-    def get(self, request):
+    def get(self, request,page):
         """显示"""
-
         # 获取用户的订单信息
+        user = request.user
+        orders = OrderInfo.objects.filter(user=user).order_by('-create_time')
 
-        return render(request, 'user_center_order.html', {'page': 'order'})  # page=order
+        # 遍历获取订单商品的信息
+        for order in orders :
+            #根据order_id查询订单商品信息
+            order_skus = OrderGoods.objects.filter(order_id=order.order_id)
+
+            # 遍历order_skus计算商品的小计
+            for order_sku in order_skus:
+                # 计算金额
+                amount = order_sku.count * order_sku.price
+                # 动态添加amount属性
+                order_sku.amount = amount
+            # 动态添加属性，保存商品的标题
+            order.status_name = OrderInfo.ORDER_STATUS[order.order_status]
+
+            # 动态添加属性保存订单商品的信息
+            order.order_skus = order_skus
+
+        # 分页
+        paginator = Paginator(orders,5)
+
+        # 获取第page页的内容
+        try:
+            page = int(page)
+        except Exception as e:
+            page = 1
+        
+        # 如果大于分页的总页数
+        if page > paginator.num_pages:
+            page=1
+
+        # 获取第page页的Page对象
+        order_page = paginator.page(page)
+
+        num_pages = paginator.num_pages  # 总页数
+
+        if num_pages < 5 :
+            pages = range(1,num_pages+1) 
+
+        elif page <= 3:
+            pages= range(1,6)
+
+        elif num_pages - page <=2 :
+            pages= range(num_pages-4,num_pages+1)
+        else:
+            pages = range(page-2,page+3)
+        context = {
+
+                'order_page':order_page,
+                'pages':pages,
+                'page':'order'
+
+        }
+
+        return render(request, 'user_center_order.html', context)  # page=order
 
 
 # user/address
@@ -231,9 +286,19 @@ class UserAddressView(LoginRequiredMixin, View):
         # 获取登录用户的user对象
         user = request.user
 
-        # 获取用户的默认地址
-        address = Address.objects.get_default_address(user)
+        # # 获取用户的默认地址
+        # try:
+        #     address = Address.objects.get_default_address(user)
+        # except Address.DoesNotExist:
+        #     address=None
 
+
+         # 获取用户的所有地址
+        try:
+            address = Address.objects.filter(user=user)
+        except Address.DoesNotExist:
+            address=None
+        
         return render(request, 'user_center_site.html', {'page': 'address', 'address': address})  # page=address
 
     def post(self, request):

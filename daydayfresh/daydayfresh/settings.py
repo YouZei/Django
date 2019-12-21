@@ -26,7 +26,7 @@ SECRET_KEY = 'qevt5_(o@18$n_@jfh_$rlmy%qk@i-(ufv-2nb8jm6p-5p&(%w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -168,4 +168,4 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # 指定搜索结果每页显示的条数
-HAYSTACK_SEARCH_RESULTS_PER_PAGE=1
+HAYSTACK_SEARCH_RESULTS_PER_PAGE=10

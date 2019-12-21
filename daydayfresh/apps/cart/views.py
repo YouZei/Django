@@ -14,7 +14,6 @@ from utils.mixin import LoginRequiredMixin
 # cart/add
 class CartAddView(View):
     """购物车记录添加"""
-
     def post(self, request):
         """购物车记录增加"""
         user = request.user
@@ -64,7 +63,7 @@ class CartAddView(View):
         total_count = conn.hlen(cart_key)
 
         # 返回应答
-        return JsonResponse({'res': 5, 'errmsg': '添加成功'})
+        return JsonResponse({'res': 5, 'errmsg': '添加成功','total_count':total_count})
 
 
 # /cart/

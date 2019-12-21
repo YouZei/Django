@@ -1,10 +1,11 @@
 {% extends 'base_user_center.html' %}
+{% load staticfiles %}
 {% block right_content %}
     <div class="right_content clearfix">
         <div class="info_con clearfix">
             <h3 class="common_title2">基本信息</h3>
             <ul class="user_info_list">
-                <li><span>用户名：</span>{{ address.user }}</li>
+                <li><span>用户名：</span>{{ user.username }}</li>
                 {% if address %}
                     <li><span>联系方式：</span>{{ address.phone }}</li>
                     <li><span>联系地址：</span>{{ address.addr }}</li>
@@ -20,12 +21,11 @@
             <ul class="goods_type_list clearfix">
                 {% for goods in goods_li %}
                     <li>
-                        <a href="detail.html"><img src="{{ goods.image.url }}"></a>
-                        <h4><a href="detail.html">{{ goods.name }}</a></h4>
+                        <a href="{% url 'goods:detail' goods.id %}"><img src="{{ goods.image.url }}"></a>
+                        <h4><a href="">{{ goods.name }}</a></h4>
                         <div class="operate">
                             <span class="prize">￥{{ goods.price }}</span>
                             <span class="unit">{{ goods.price }}/{{ goods.unite }}</span>
-                            <a href="#" class="add_goods" title="加入购物车"></a>
                         </div>
                     </li>
                 {% empty %}
@@ -35,3 +35,18 @@
         </div>
     </div>
 {% endblock right_content %}
+{% block bottomfiles %}
+    <script src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
+    <script>
+     // 搜索优化
+        $("#sub").click(function (event) {
+            event.preventDefault();
+            var query_val = $(this).prev().val();
+            if (!query_val){
+                location.reload()
+            }else {
+               $(this).parent().submit()
+            }
+        })
+    </script>
+{% endblock bottomfiles %}

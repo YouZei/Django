@@ -72,6 +72,6 @@ def generate_static_index_html():
     # 2.渲染模板
     static_index_html = temp_html.render(context)
     # 3.生成对应的首页静态文件，保存在worker执行者上
-    save_path = os.path.join(settings.BASE_DIR, 'static/index.html')
+    save_path = os.path.join(settings.BASE_DIR, 'static/404.html')
     with open(save_path, 'w') as f:
         f.write(static_index_html)
