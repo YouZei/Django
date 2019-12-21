@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from .views import html404
+from .views import html404,html500
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),# 后台管理
     url(r'^tinymce/', include('tinymce.urls')),  # 富文本编辑器
     url(r'^user/', include('user.urls', namespace='user')),  # 用户模块
     url(r'^order/', include('order.urls', namespace='order')),  # 订单模块
@@ -25,4 +25,6 @@ urlpatterns = [
     url(r'^', include('goods.urls', namespace='goods')),  # 商品模块
 ]
 
+# error页面
 handler404 = html404
+handler500 = html500

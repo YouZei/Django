@@ -7,5 +7,8 @@
 """
 from django.shortcuts import render_to_response
 
-def html404(request,**kwargs):
-    return render_to_response('error/404.html')
+def html404(request,*args, **kwargs):
+    return render_to_response('error_html/404.html')
+
+def html500(request,*args, **kwargs):
+    return render_to_response('error_html/500.html')
