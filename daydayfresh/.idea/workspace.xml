@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e67f8f2a-cf24-496e-bf1d-2f34a088028b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/uwsgi.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/goods/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/celery_tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/celery_tasks/tasks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daydayfresh/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/daydayfresh/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/jquery-1.12.4.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jquery-1.12.4.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/fdfs/client.conf" beforeDir="false" afterPath="$PROJECT_DIR$/utils/fdfs/client.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/whoosh_index/MAIN_xro6e2xpma548yu6.seg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/whoosh_index/_MAIN_1.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -196,7 +185,8 @@
       <workItem from="1576916474878" duration="1701000" />
       <workItem from="1576918389714" duration="10362000" />
       <workItem from="1576942465716" duration="74000" />
-      <workItem from="1577004198634" duration="11766000" />
+      <workItem from="1577004198634" duration="13952000" />
+      <workItem from="1577033103059" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="自定义文件存储类">
       <created>1571059525230</created>
@@ -212,7 +202,21 @@
       <option name="project" value="LOCAL" />
       <updated>1576919101842</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="添加访问错误页面404，500">
+      <created>1577027640483</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1577027640483</updated>
+    </task>
+    <task id="LOCAL-00004" summary="完成">
+      <created>1577027695323</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1577027695323</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +248,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="自定义文件存储类" />
     <MESSAGE value="添加访问错误页面404，500" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加访问错误页面404，500" />
+    <MESSAGE value="完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
