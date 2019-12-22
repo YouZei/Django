@@ -74,7 +74,6 @@
     {% endfor %}
 {% endblock body %}
 {% block bottomfiles %}
-    <script type="text/javascript" src="{% static 'js/jquery-1.12.4.min.js' %}"></script>
     <script type="text/javascript">
     // 搜索优化
     $("#sub").click(function (event) {
@@ -86,7 +85,5 @@
            $(this).parent().submit()
         }
     })
-
-
     </script>
 {% endblock bottomfiles %}

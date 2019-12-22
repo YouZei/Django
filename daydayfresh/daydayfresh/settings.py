@@ -26,7 +26,7 @@ SECRET_KEY = 'qevt5_(o@18$n_@jfh_$rlmy%qk@i-(ufv-2nb8jm6p-5p&(%w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -122,7 +122,7 @@ EMAIL_PORT = 25
 # 发送邮件的邮箱
 EMAIL_HOST_USER = '1058303163@qq.com'
 # 在邮箱中设置的客户端授权密码
-EMAIL_HOST_PASSWORD = 'orakprkpbnrcbbji'
+EMAIL_HOST_PASSWORD = 'codytrftljevbbei'
 # 收件人看到的发件人
 EMAIL_FROM = '天天生鲜<1058303163@qq.com>'
 

@@ -20,7 +20,6 @@ class GoodsType(BaseModel):
     def __str__(self):
         return self.name
 
-
 class GoodsSKU(BaseModel):
     '''商品SKU模型类'''
     status_choices = (
@@ -55,8 +54,8 @@ class Goods(BaseModel):
     detail = HTMLField(blank=True, verbose_name='商品详情')
 
     def __str__(self):
-        return self.name
 
+        return self.name
 
     class Meta:
         db_table = 'df_goods'
@@ -70,7 +69,7 @@ class GoodsImage(BaseModel):
     image = models.ImageField(upload_to='goods', verbose_name='图片路径')
 
     def __str__(self):
-        return self.sku
+        return self.sku.name
 
     class Meta:
         db_table = 'df_goods_image'
@@ -85,7 +84,8 @@ class IndexGoodsBanner(BaseModel):
     index = models.SmallIntegerField(default=0, verbose_name='展示顺序')
 
     def __str__(self):
-        return self.sku
+
+        return self.sku.name
 
     class Meta:
         db_table = 'df_index_banner'
@@ -106,7 +106,8 @@ class IndexTypeGoodsBanner(BaseModel):
     index = models.SmallIntegerField(default=0, verbose_name='展示顺序')
 
     def __str__(self):
-        return self.sku
+
+        return self.sku.name
 
     class Meta:
         db_table = 'df_index_type_goods'

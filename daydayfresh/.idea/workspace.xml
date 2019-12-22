@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e67f8f2a-cf24-496e-bf1d-2f34a088028b" name="Default Changelist" comment="自定义文件存储类">
-      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/error_html/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/error_html/500.html" afterDir="false" />
+    <list default="true" id="e67f8f2a-cf24-496e-bf1d-2f34a088028b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/uwsgi.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daydayfresh/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/daydayfresh/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/daydayfresh/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/daydayfresh/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/goods/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/goods/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/celery_tasks/tasks.py" beforeDir="false" afterPath="$PROJECT_DIR$/celery_tasks/tasks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daydayfresh/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/daydayfresh/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirement.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirement.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/jquery-1.12.4.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/jquery-1.12.4.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/fdfs/client.conf" beforeDir="false" afterPath="$PROJECT_DIR$/utils/fdfs/client.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whoosh_index/MAIN_xro6e2xpma548yu6.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whoosh_index/_MAIN_1.toc" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,16 +54,16 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/css" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\project\Django\daydayfresh\static" />
+      <recent name="E:\project\Django\daydayfresh" />
       <recent name="E:\project\Django\daydayfresh\static\css" />
       <recent name="E:\project\Django\daydayfresh\templates\error_html" />
-      <recent name="E:\project\Django\daydayfresh\static" />
       <recent name="E:\project\Django\daydayfresh\daydayfresh\error_html" />
-      <recent name="E:\project\Django\daydayfresh\daydayfresh\error_html\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\project\Django\daydayfresh\static" />
@@ -79,8 +85,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Django server.daydayfresh">
+  <component name="RunManager" selected="JavaScript Debug.index.html">
     <configuration name="404.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/daydayfresh/templates/error/404.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/daydayfresh/static/index.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="search.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/daydayfresh/templates/search/search.html" useBuiltInWebServerPort="true">
@@ -134,6 +143,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.404.html" />
         <item itemvalue="JavaScript Debug.search.html" />
         <item itemvalue="Python.zlk_01" />
@@ -184,7 +194,9 @@
       <workItem from="1576814504775" duration="33808000" />
       <workItem from="1576893284315" duration="21365000" />
       <workItem from="1576916474878" duration="1701000" />
-      <workItem from="1576918389714" duration="574000" />
+      <workItem from="1576918389714" duration="10362000" />
+      <workItem from="1576942465716" duration="74000" />
+      <workItem from="1577004198634" duration="11766000" />
     </task>
     <task id="LOCAL-00001" summary="自定义文件存储类">
       <created>1571059525230</created>
@@ -193,7 +205,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571059525230</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="添加访问错误页面404，500">
+      <created>1576919101842</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576919101842</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +243,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="自定义文件存储类" />
-    <option name="LAST_COMMIT_MESSAGE" value="自定义文件存储类" />
+    <MESSAGE value="添加访问错误页面404，500" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加访问错误页面404，500" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

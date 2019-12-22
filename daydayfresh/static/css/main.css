@@ -415,21 +415,21 @@ html,body{height:100%}
 
 .goods_list_th{height:40px;border-bottom:1px solid #ccc}
 .goods_list_th li{float:left;line-height:40px;text-align:center;}
-.goods_list_th .col01{width:25%}
-.goods_list_th .col02{width:20%}
-.goods_list_th .col03{width:25%}
-.goods_list_th .col04{width:15%}
-.goods_list_th .col05{width:15%}
+.goods_list_th .col01{width:27%}
+.goods_list_th .col02{width:15%}
+.goods_list_th .col03{width:21%}
+.goods_list_th .col04{width:17%}
+.goods_list_th .col05{width:9%}
 
 .goods_list_td{height:80px;border-bottom:1px solid #eeeded}
-.goods_list_td li{float:left;line-height:80px;text-align:center;}
+.goods_list_td li{float:left;text-align:center;}
 .goods_list_td .col01{width:4%}
-.goods_list_td .col02{width:6%}
-.goods_list_td .col03{width:15%}
-.goods_list_td .col04{width:20%}
-.goods_list_td .col05{width:25%}
-.goods_list_td .col06{width:15%}
-.goods_list_td .col07{width:15%}
+.goods_list_td .col02{width:5%}
+.goods_list_td .col03{width:25%}
+.goods_list_td .col04{width:0%}
+.goods_list_td .col05{width:37%}
+.goods_list_td .col06{width:1%}
+.goods_list_td .col07{width:25%}
 
 .goods_list_td .col02{text-align:right}
 .goods_list_td .col02 img{width:63px;height:63px;border:1px solid #ddd;display:block;margin:7px 0;float:right;}
